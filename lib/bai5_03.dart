@@ -62,20 +62,6 @@ class _TimeAppState extends State<TimeApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: const Text(
-            "Time App",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        backgroundColor: Color.fromARGB(255, 2, 40, 57),
-        // foregroundColor: Colors.blue,
-      ),
       body: Container(
         color: Color.fromARGB(255, 2, 40, 57),
         child: Column(

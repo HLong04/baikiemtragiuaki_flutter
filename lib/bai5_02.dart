@@ -30,19 +30,6 @@ class _CoutAppState extends State<CoutApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: const Text(
-            "Ứng dụng Đếm Số",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        backgroundColor: Color.fromARGB(255, 2, 40, 57),
-      ),
       body: Container(
         color: Color.fromARGB(255, 2, 40, 57),
         child: Column(
@@ -52,7 +39,7 @@ class _CoutAppState extends State<CoutApp> {
               "Giá trị hiện tại:",
               style: TextStyle(
                 fontSize: 30,
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),

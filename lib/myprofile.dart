@@ -9,15 +9,16 @@ class MyProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     const Color mainBackgroundColor = Color.fromARGB(255, 2, 40, 71);
     const Color appBarColor = Color.fromARGB(255, 0, 89, 161);
+
     return Scaffold(
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text(
             "User Profile",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 2, 40, 71),
+        backgroundColor: const Color.fromARGB(255, 2, 40, 71),
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -27,7 +28,7 @@ class MyProfile extends StatelessWidget {
         color: mainBackgroundColor,
         child: Column(
           children: [
-            SizedBox(height: MediaQuery.of(context).padding.top + 60),
+            SizedBox(height: MediaQuery.of(context).padding.top + 10), // Giảm bớt khoảng trống thừa
 
             Container(
               padding: const EdgeInsets.all(4),
@@ -43,7 +44,7 @@ class MyProfile extends StatelessWidget {
                 backgroundColor: Colors.white,
                 backgroundImage: NetworkImage(user.image),
                 onBackgroundImageError: (_, __) =>
-                    const Icon(Icons.person, size: 60, color: Colors.grey),
+                const Icon(Icons.person, size: 60, color: Colors.grey),
               ),
             ),
 
@@ -70,6 +71,7 @@ class MyProfile extends StatelessWidget {
 
             const SizedBox(height: 30),
 
+            // Phần khung trắng bên dưới
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -77,26 +79,40 @@ class MyProfile extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
                 ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 25,
-                  vertical: 30,
-                ),
-                child: Column(
-                  children: [
-                    const Text(
-                      "Personal Information",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: appBarColor,
+                // --- SỬA Ở ĐÂY: Thêm ClipRRect để khi cuộn nội dung không bị chờm ra khỏi góc bo tròn ---
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+
+                  // --- SỬA QUAN TRỌNG NHẤT: Bọc Column bằng SingleChildScrollView ---
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(), // Hiệu ứng cuộn mượt (giống iOS)
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 25,
+                        vertical: 30,
+                      ),
+                      child: Column(
+                        children: [
+                          const Text(
+                            "Personal Information",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: appBarColor,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          _buildInfoTile("User ID", "${user.id}", Icons.badge),
+                          _buildInfoTile("Email", user.email, Icons.email), // Sửa icon Birthday cho hợp lý
+
+                          // Thử thêm vài dòng giả để test cuộn
+                          // _buildInfoTile("Address", "Hue City, Vietnam", Icons.location_on),
+
+                          const SizedBox(height: 20),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 20),
-
-                    _buildInfoTile("User ID", "${user.id}", Icons.badge),
-                    _buildInfoTile("Email", user.email, Icons.email),
-                    const SizedBox(height: 20),
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -118,35 +134,36 @@ class MyProfile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Icon nằm trong ô tròn
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: primaryColor.withOpacity(0.1), // Nền icon mờ
+              color: primaryColor.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: primaryColor, size: 22),
           ),
           const SizedBox(width: 15),
-
-          // Thông tin text
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: TextStyle(color: Colors.grey[600], fontSize: 12),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                value,
-                style: const TextStyle(
-                  color: primaryColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: TextStyle(color: Colors.grey[600], fontSize: 12),
                 ),
-              ),
-            ],
+                const SizedBox(height: 2),
+                Text(
+                  value,
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           ),
         ],
       ),

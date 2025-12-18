@@ -46,20 +46,6 @@ class _ChangeColorAppState extends State<ChangeColorApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            "Change Color App",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        backgroundColor: Color.fromARGB(255, 2, 40, 57),
-        // foregroundColor: Color.fromARGB(255, 2, 40, 57),
-      ),
       body: Container(
         color: brcolor,
         child: Center(

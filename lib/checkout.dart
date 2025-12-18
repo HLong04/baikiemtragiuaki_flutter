@@ -45,7 +45,7 @@ class CheckoutPage extends StatelessWidget {
 
             // --- 2. DANH SÁCH SẢN PHẨM ---
             const Text(
-              "📦 Sản phẩm đã chọn",
+              "Sản phẩm đã chọn",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
@@ -84,7 +84,7 @@ class CheckoutPage extends StatelessWidget {
 
             // --- 3. PHƯƠNG THỨC THANH TOÁN ---
             const Text(
-              "💳 Phương thức thanh toán",
+              "Phương thức thanh toán",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
@@ -120,7 +120,7 @@ class CheckoutPage extends StatelessWidget {
             const SizedBox(height: 20),
 
             // --- 4. CHI TIẾT THANH TOÁN ---
-            const Text("📄 Chi tiết thanh toán", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text("Chi tiết thanh toán", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             _buildSummaryRow("Tổng tiền hàng", "${subTotal.toStringAsFixed(2)}\$"),
             _buildSummaryRow("Phí vận chuyển", "${shippingFee.toStringAsFixed(2)}\$"),

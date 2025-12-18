@@ -40,10 +40,6 @@ class _FormTinhBmiState extends State<FormTinhBmi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text("Tính chỉ số BMI")),
-        backgroundColor: Color(const Color.fromARGB(255, 2, 55, 98).value),
-      ),
       body: Form(
         key: _formKey,
         child: Padding(

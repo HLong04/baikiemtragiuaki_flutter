@@ -26,7 +26,6 @@ class User {
       firstName: json['firstName'],
       lastName: json['lastName'],
       image: json['image'],
-
       accessToken: json['accessToken'],
       refreshToken: json['refreshToken'],
     );

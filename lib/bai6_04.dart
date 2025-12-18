@@ -21,10 +21,6 @@ class _GuiPhanHoiState extends State<GuiPhanHoi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text("Gửi phản hồi")),
-        backgroundColor: const Color.fromARGB(255, 2, 55, 98),
-      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(12),
         child: Column(

@@ -8,7 +8,7 @@ void main() {
     username: "test_user",
     firstName: "Nguyễn",
     lastName: "Hoàng Long",
-    email: "nguyenhoanglong@gmail.com",
+    email: "hoanglong@gmail.com",
     image:
         "https://wp-cms-media.s3.ap-east-1.amazonaws.com/lay_anh_dai_dien_facebook_dep_2_9566e566aa.jpg",
     accessToken: "token_mau",

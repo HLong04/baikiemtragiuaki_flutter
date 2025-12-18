@@ -14,19 +14,6 @@ class _MyAppNews01State extends State<MyAppNews01> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            "List News",
-            style: TextStyle(
-              fontSize: 30,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        backgroundColor: const Color.fromARGB(255, 4, 61, 108),
-      ),
       body: FutureBuilder(
         future: MyAPI.getAllArticles(),
         builder: (context, snapshot) {

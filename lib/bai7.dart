@@ -3,7 +3,7 @@ import 'package:labtonghop/api.dart';
 import 'package:labtonghop/detailproduct.dart';
 import 'package:labtonghop/model/product.dart';
 import 'package:labtonghop/mycart.dart';
-import 'package:labtonghop/global_var.dart'; // Import file chứa myCart
+import 'package:labtonghop/mymessager.dart';
 
 class MyProduct extends StatefulWidget {
   const MyProduct({super.key});
@@ -32,7 +32,6 @@ class _MyProductState extends State<MyProduct> {
             return Center(child: Text("Lỗi: ${snapshot.error}"));
           } else if (snapshot.hasData) {
 
-            // 2. LOGIC LỌC SẢN PHẨM Ở ĐÂY
             List<Product> listGoc = snapshot.data!;
 
             List<Product> listHienThi = listGoc.where((p) {
@@ -73,13 +72,15 @@ class _MyProductState extends State<MyProduct> {
 
   Widget myProduct(BuildContext context, Product p) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
+      onTap: () async {
+        await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => MyDetailProduct(product: p),
           ),
         );
+        setState(() {
+        });
       },
       child: Container(
         padding: const EdgeInsets.all(10),
@@ -150,7 +151,6 @@ class _MyProductState extends State<MyProduct> {
     );
   }
 
-  // --- HÀM TABBAR ĐÃ SỬA ĐỂ NHẬP LIỆU ---
   Widget tabBar() {
     return Container(
       child: Row(
@@ -172,7 +172,6 @@ class _MyProductState extends State<MyProduct> {
                   Expanded(
                     child: TextField(
                       onChanged: (value) {
-                        // Khi gõ phím -> Cập nhật keySearch -> Build lại UI
                         setState(() {
                           keySearch = value;
                         });
@@ -204,23 +203,23 @@ class _MyProductState extends State<MyProduct> {
             ),
           ),
 
-          const SizedBox(width: 15),
+          SizedBox(width: 15),
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CartPage()),
+                MaterialPageRoute(builder: (context) => CartPage()),
               );
             },
             child: Stack(
               alignment: Alignment.topRight,
               children: [
-                const Icon(Icons.shopping_cart_outlined, color: Colors.white, size: 26),
+                Icon(Icons.shopping_cart_outlined, color: Colors.white, size: 26),
                 if (myCart.isNotEmpty)
                   Container(
-                    padding: const EdgeInsets.all(2),
-                    decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-                    constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                    padding: EdgeInsets.all(2),
+                    decoration: BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+                    constraints: BoxConstraints(minWidth: 16, minHeight: 16),
                     child: Text(
                       '${myCart.length}',
                       style: const TextStyle(color: Colors.white, fontSize: 10),
@@ -231,7 +230,35 @@ class _MyProductState extends State<MyProduct> {
             ),
           ),
           const SizedBox(width: 15),
-          const Icon(Icons.chat_outlined, color: Colors.white, size: 26),
+          GestureDetector(
+            onTap: () {
+              // Chuyển sang trang tin nhắn
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MessagePage()),
+              );
+            },
+            child: Stack(
+              alignment: Alignment.topRight,
+              children: [
+                const Icon(Icons.chat_outlined, color: Colors.white, size: 26),
+                // Giả vờ có 5 tin nhắn chưa đọc
+                Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: const BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle
+                  ),
+                  constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                  child: const Text(
+                    '5',
+                    style: TextStyle(color: Colors.white, fontSize: 10),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -242,19 +269,17 @@ class _MyProductState extends State<MyProduct> {
       children: [
         if ((p.price ?? 0) <= 50.0) ...[
           Container(
-            margin: const EdgeInsets.only(right: 10),
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            margin: EdgeInsets.only(right: 10),
+            padding: EdgeInsets.symmetric(horizontal: 7, vertical: 3),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.deepOrange),
               borderRadius: BorderRadius.circular(5),
               color: Colors.deepOrange.withOpacity(0.2),
             ),
             child: Row(
-              children: const [
-                Icon((Icons.thumb_up), color: Colors.deepOrange, size: 11),
-                SizedBox(width: 3),
+              children: [
                 Text(
-                  'Rẻ Vô Địch',
+                  'super sale',
                   style: TextStyle(fontSize: 13, color: Colors.deepOrange),
                 ),
               ],
@@ -262,7 +287,7 @@ class _MyProductState extends State<MyProduct> {
           ),
         ],
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 3),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.amberAccent),
             borderRadius: BorderRadius.circular(5),
@@ -271,8 +296,7 @@ class _MyProductState extends State<MyProduct> {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.star, color: Colors.amber, size: 16),
-              const SizedBox(width: 5),
+              Icon(Icons.star, color: Colors.amber, size: 16),
               Text(
                 (p.rating?.rate ?? 0.0).toString(),
                 style: const TextStyle(fontSize: 13),
