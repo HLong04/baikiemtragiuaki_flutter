@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:labtonghop/bai6_01.dart';
 
@@ -39,6 +38,9 @@ class _LoginAppState extends State<LoginApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(" "),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

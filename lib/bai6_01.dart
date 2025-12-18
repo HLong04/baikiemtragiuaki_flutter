@@ -34,6 +34,9 @@ class _RegisterAppState extends State<RegisterApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(" "),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: SingleChildScrollView( // Thêm cái này để khi bàn phím hiện lên không bị lỗi che màn hình

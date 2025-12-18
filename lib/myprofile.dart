@@ -103,11 +103,7 @@ class MyProfile extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           _buildInfoTile("User ID", "${user.id}", Icons.badge),
-                          _buildInfoTile("Email", user.email, Icons.email), // Sửa icon Birthday cho hợp lý
-
-                          // Thử thêm vài dòng giả để test cuộn
-                          // _buildInfoTile("Address", "Hue City, Vietnam", Icons.location_on),
-
+                          _buildInfoTile("Email", user.email, Icons.email),
                           const SizedBox(height: 20),
                         ],
                       ),
